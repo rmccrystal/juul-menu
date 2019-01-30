@@ -9,6 +9,7 @@ void Attacks::Attack::StartAttack()
 	this->startTime = Utils::GetTime();
 	this->endTime = this->startTime + this->GetAttackOptions().time;
 	this->attackPid = Utils::RunCommand(this->command);
+	Utils::RunCommand("sleep " + std::to_string(this->options.time) + " && kill -9 " + std::to_string(this->attackPid));
 }
 
 void Attacks::Attack::StopAttack()

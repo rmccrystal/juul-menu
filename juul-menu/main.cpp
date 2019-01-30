@@ -12,11 +12,10 @@ int main()
 	AttackOptions options;
 	options.ipAddr = "127.0.0.1";
 	options.port = 420;
-	options.time = 30;
-	Attack attack = Attack(options, "sleep 5 && echo ''test'' | nc {{ip}} {{port}}", "ping");
+	options.time = 5;
+	Attack attack = Attack(options, "echo ''test'' | nc {{ip}} {{port}}", "nc");
 	attack.StartAttack();
-	std::cout << attack.GetAttackPid() << std::endl;
-	sleep(1);
+	sleep(100);
 	attack.StopAttack();
 	std::cout << "attack end" << std::endl;
 	std::cin.get();
