@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="processutils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="attack.cpp" />
+    <ClCompile Include="util.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Attacks">
+      <UniqueIdentifier>{6a23657d-5583-4f57-90b1-a752f8c13c68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{cae1771a-2b68-4757-a204-7f7f5996d0ef}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="processutils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="attack.h" />
+    <ClInclude Include="util.h" />
+    <ClInclude Include="attacktype.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
