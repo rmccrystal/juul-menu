@@ -5,9 +5,11 @@
 #include <unistd.h>
 #include <sys/stat.h> 
 #include <fcntl.h>
+#include <iostream>
 
 pid_t Utils::RunCommand(std::string cmd, int * infp, int * outfp)
 {
+	std::cout << cmd << std::endl;
 	const char* command = cmd.c_str();
 	int p_stdin[2];
 	int p_stdout[2];
@@ -68,6 +70,10 @@ pid_t Utils::RunCommand(std::string cmd, int * infp, int * outfp)
 
 bool Utils::ProcessExists(int pid)
 {
+	if (0 == kill(pid, 0))
+	{
+		return true;
+	}
 	return false;
 }
 

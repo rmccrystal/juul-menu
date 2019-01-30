@@ -1,6 +1,8 @@
 #include "attack.h"
 #include "processutils.h"
 #include "util.h"
+#include <algorithm>
+#include <iostream>
 
 void Attacks::Attack::StartAttack()
 {
@@ -16,7 +18,7 @@ void Attacks::Attack::StopAttack()
 
 bool Attacks::Attack::IsAttackRunning()
 {
-	return true;		// TODO: Get this to work
+	return Utils::ProcessExists(this->attackPid);
 }
 
 Attacks::AttackOptions Attacks::Attack::GetAttackOptions()
@@ -29,16 +31,29 @@ int Attacks::Attack::GetTimeLeft()
 	return this->endTime - this->startTime;
 }
 
+int Attacks::Attack::GetAttackPid()
+{
+	return this->attackPid;
+}
+
 std::string Attacks::Attack::GetAttackName()
 {
 	return this->name;
 }
 
 Attacks::Attack::Attack(AttackOptions options, std::string commandTemplate, std::string attackName)
+	: commandTemplate(commandTemplate), options(options), name(attackName)
 {
-	this->command = commandTemplate;
-	this->options = options;
-	this->name = attackName;
+	this->command = GenerateAttackCommand(options, commandTemplate);
+}
+Attacks::Attack::Attack(AttackOptions options, AttackType attackType)
+	: Attack(options, attackType.commandTemplate, attackType.attackName)
+{
+	
+}
+Attacks::Attack::~Attack()
+{
+	StopAttack();
 }
 /*
 * CommandTemplate syntax:
@@ -48,6 +63,8 @@ Attacks::Attack::Attack(AttackOptions options, std::string commandTemplate, std:
 */
 std::string Attacks::GenerateAttackCommand(Attacks::AttackOptions attackOptions, std::string commandTemplate)
 {
-	attackOptions.ipAddr;
-	return std::string();
+	Utils::StringReplace(commandTemplate, "{{ip}}", attackOptions.ipAddr);
+	Utils::StringReplace(commandTemplate, "{{port}}", std::to_string(attackOptions.port));
+	Utils::StringReplace(commandTemplate, "{{time}}", std::to_string(attackOptions.time));
+	return commandTemplate;
 }

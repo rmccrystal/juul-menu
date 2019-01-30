@@ -1,14 +1,11 @@
 #pragma once
 
-enum AttackType {
-	ATTACKTYPE_UDP1,
-	ATTACKTYPE_UDP2,
-	ATTACKTYPE_UDP3,
-	ATTACKTYPE_UDP4,
-	ATTACKTYPE_UDP5,
-	ATTACKTYPE_VGBOOT,
-	ATTACKTYPE_GOTT,
-	ATTACKTYPE_NYTRO,
-	ATTACKTYPE_SLOWLORIS,
-	ATTACKTYPE_
+#include "attack.h"
+#include <vector>
+
+namespace Attacks {
+	struct AttackType {
+		std::string attackName;
+		std::string commandTemplate;
+	};
 }
