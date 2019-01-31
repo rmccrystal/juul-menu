@@ -13,6 +13,13 @@ namespace Attacks {
 		{ "NYTRO",		"perl nytro.pl {{ip}} {{port}} 30000 {{time}}"},
 		{ "JUUL",		"perl juul.pl {{ip}} {{port}} 0 {{time}} 100"}
 	};
+	AttackType GetAttackType(std::string name)
+	{
+		
+		for (AttackType type : AttackTypes) {
+			if(std::tolower)
+		}
+	}
 }
 
 

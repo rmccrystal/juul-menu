@@ -15,3 +15,9 @@ void Utils::StringReplace(std::string & str, std::string oldStr, std::string new
 		pos += newStr.length();
 	}
 }
+
+bool Utils::IsValidIP(std::string ipAddr)
+{
+	unsigned char a, b, c, d;
+	return sscanf(ipAddr.c_str(), "%d.%d.%d.%d", &a, &b, &c, &d) == 4;
+}
