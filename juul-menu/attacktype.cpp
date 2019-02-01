@@ -22,7 +22,7 @@ namespace Attacks {
 			{
 				return type;
 			}
-		}
+		} 
 		throw "Attack not found";
 	}
 }
