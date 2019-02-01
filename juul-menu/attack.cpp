@@ -9,45 +9,52 @@ void Attacks::Attack::StartAttack()
 	this->startTime = Utils::GetTime();
 	this->endTime = this->startTime + this->GetAttackOptions().time;
 	this->attackPid = Utils::RunCommand(this->command);
-	Utils::RunCommand("sleep " + std::to_string(this->options.time) + " && kill -9 " + std::to_string(this->attackPid));
+	Utils::RunCommand("sleep " + std::to_string(this->options.time) + " && pkill -P " + std::to_string(this->attackPid));
 }
 
 void Attacks::Attack::StopAttack()
 {
+	std::cout << "stopping attack" << std::endl;
 	Utils::KillPid(this->attackPid);
 }
 
-bool Attacks::Attack::IsAttackRunning()
+bool Attacks::Attack::IsAttackRunning() const
 {
 	return Utils::ProcessExists(this->attackPid);
 }
 
-Attacks::AttackOptions Attacks::Attack::GetAttackOptions()
+Attacks::AttackOptions Attacks::Attack::GetAttackOptions() const
 {
 	return this->options;
 }
 
-int Attacks::Attack::GetTimeLeft()
+int Attacks::Attack::GetTimeLeft() const
 {
 	return this->endTime - this->startTime;
 }
 
-int Attacks::Attack::GetAttackPid()
+int Attacks::Attack::GetAttackPid() const
 {
 	return this->attackPid;
 }
 
-std::string Attacks::Attack::GetAttackName()
+Attacks::AttackType Attacks::Attack::GetAttackType() const
+{
+	return this->attackType;
+}
+
+std::string Attacks::Attack::GetAttackName() const
 {
 	return this->name;
 }
 
-Attacks::Attack::Attack(AttackOptions options, std::string commandTemplate, std::string attackName)
-	: commandTemplate(commandTemplate), options(options), name(attackName)
+Attacks::Attack::Attack(const AttackOptions options, const std::string commandTemplate, const std::string attackName)
+	: options(options), name(attackName), commandTemplate(commandTemplate)
 {
+	this->attackType = { attackName, commandTemplate };
 	this->command = GenerateAttackCommand(options, commandTemplate);
 }
-Attacks::Attack::Attack(AttackOptions options, AttackType attackType)
+Attacks::Attack::Attack(const AttackOptions options, const AttackType attackType)
 	: Attack(options, attackType.commandTemplate, attackType.attackName)
 {
 	

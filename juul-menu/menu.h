@@ -1,5 +1,6 @@
 #pragma once
 
 namespace Menu {
-	void StartMenu();
+	int StartMenu();
+	int StartAttackFromArgs(int argc, char* argv[]);
 }

@@ -8,4 +8,5 @@ namespace Attacks {
 		std::string attackName;
 		std::string commandTemplate;
 	};
+	AttackType GetAttackType(const std::string name);
 }

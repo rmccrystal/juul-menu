@@ -1,9 +1,10 @@
 #include "util.h"
 #include <ctime>
+#include <functional>
 
 int Utils::GetTime()
 {
-	std::time_t t = std::time(0);
+	const std::time_t t = std::time(nullptr);
 	return static_cast<int>(t);
 }
 
@@ -18,6 +19,23 @@ void Utils::StringReplace(std::string & str, std::string oldStr, std::string new
 
 bool Utils::IsValidIP(std::string ipAddr)
 {
-	unsigned char a, b, c, d;
-	return sscanf(ipAddr.c_str(), "%d.%d.%d.%d", &a, &b, &c, &d) == 4;
+	return true;
+	// TODO: Make this func work with this regex:
+	// ((25[0-5]|2[0-4][0-9]|[1][0-9][0-9]|[1-9][0-9]{0,1})\.){3}(25[0-5]|2[0-4][0-9]|[1][0-9][0-9]|[1-9][0-9]{0,1})
+}
+
+bool Utils::StringCompareCaseInsensitive(std::string const& a, std::string const& b)
+{
+	const auto icomparePred = [](unsigned const char char1, unsigned const char char2)
+	{
+		return std::tolower(char1) == std::tolower(char2);
+	};
+	if (a.length()==b.length()) {
+        return std::equal(b.begin(), b.end(),
+                           a.begin(), icomparePred);
+    }
+    else {
+        return false;
+    }
+
 }

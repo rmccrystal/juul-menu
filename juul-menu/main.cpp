@@ -11,22 +11,11 @@ using namespace Attacks;
 
 int main(int argc, char *argv[])
 {
-	if (argc == 0) {
-		Menu::StartMenu();
-	}
-
-	AttackOptions options;
-	AttackType type;
-
-	if (Utils::IsValidIP(argv[1])) {
-		options.ipAddr = argv[1];
+	if(argc == 1)
+	{
+		return Menu::StartMenu();
 	}
 	else {
-		std::cout << "Invalid IP";
+		return Menu::StartAttackFromArgs(argc, argv);
 	}
-
-	options.port = std::atoi(argv[2]);
-	options.time = std::atoi(argv[3]);
-	
-	return 0;
 }

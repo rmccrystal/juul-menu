@@ -20,21 +20,23 @@ namespace Attacks {
 
 	class Attack {
 	protected:
-		AttackOptions options;
-		int attackPid;
-		int startTime;
-		int endTime;
-		std::string command;
-		std::string name;
-		std::string commandTemplate;
+		AttackOptions options{};
+		int attackPid{};
+		int startTime{};
+		int endTime{};
+		std::string command{};
+		std::string name{};
+		std::string commandTemplate{};
+		AttackType attackType{};
 	public:
 		void StartAttack();
 		void StopAttack();
-		bool IsAttackRunning();
-		AttackOptions GetAttackOptions();
-		int GetTimeLeft();
-		int GetAttackPid();
-		std::string GetAttackName();
+		bool IsAttackRunning() const;
+		AttackOptions GetAttackOptions() const;
+		int GetTimeLeft() const;
+		int GetAttackPid() const;
+		AttackType GetAttackType() const;
+		std::string GetAttackName() const;
 		Attack(AttackOptions options, std::string commandTemplate, std::string attackName);
 		Attack(AttackOptions options, AttackType attackType);
 		~Attack();

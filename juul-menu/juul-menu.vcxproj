@@ -76,13 +76,17 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClCompile Include="attack.cpp" />
+    <ClCompile Include="attacktype.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="processutils.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="attack.h" />
     <ClInclude Include="attacktype.h" />
+    <ClInclude Include="dictionary.h" />
+    <ClInclude Include="menu.h" />
     <ClInclude Include="processutils.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>

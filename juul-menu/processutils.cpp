@@ -70,14 +70,15 @@ pid_t Utils::RunCommand(std::string cmd, int * infp, int * outfp)
 
 bool Utils::ProcessExists(int pid)
 {
-	if (0 == kill(pid, 0))
+	if (0 == kill(pid, 0))  // NOLINT(readability-simplify-boolean-expr)
 	{
-		return true;
+		return true;  // NOLINT(readability-simplify-boolean-expr)
 	}
 	return false;
 }
 
-void Utils::KillPid(int pid)
+void Utils::KillPid(const int pid)
 {
-	kill(pid, SIGTERM);
+	Utils::RunCommand("pkill -P " + std::to_string(pid));		// This will kill the children too
+	//kill(pid, SIGTERM);
 }
